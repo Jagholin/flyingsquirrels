@@ -1,0 +1,52 @@
+---
+export type HowtoProps = {
+  // TODO: Add props ?
+  publishDate: string;
+  docsUrl?: string;
+};
+
+const { publishDate, docsUrl } = Astro.props;
+---
+
+<section class="howto">
+  <h2>This is a how-to page</h2>
+  <p>
+    Howto is a category where I describe techniques and libraries that I learned
+    recently. The goal is to share my knowledge with the community and to help
+    people who are looking to use the same thing but are unsure where to start.
+  </p>
+  <p>
+    This is not meant to be a replacement for the {
+      docsUrl ? (
+        <a href={docsUrl}>official documentation</a>
+      ) : (
+        `official documentation`
+      )
+    }.
+  </p>
+  <p>
+    Also keep in mind that software is always evolving and APIs are changing all
+    the time so the techniques described here might not be the best way to do
+    things anymore.
+  </p>
+  <p>
+    This page was last updated on {publishDate}.
+  </p>
+</section>
+
+<style>
+  .howto {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .howto h2 {
+    margin-top: 0;
+  }
+
+  .howto p {
+    margin-bottom: 0.5rem;
+  }
+</style>

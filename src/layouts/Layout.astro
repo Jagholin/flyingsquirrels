@@ -1,6 +1,12 @@
 ---
+import Navbar from "../components/Navbar.astro";
+import "@fontsource/archivo/200.css";
+import "@fontsource/archivo/400.css";
+import "@fontsource/archivo/600.css";
+import "@fontsource/archivo/800.css";
+import "@fontsource/archivo/variable.css";
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -8,28 +14,141 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script
+      src="https://kit.fontawesome.com/7e571179c3.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div>
+          <a href="/"><h1>Flying squirrels</h1></a>
+          <p
+            class="text-zinc-300 font-light font-mono underline text-right text-sm subheader"
+          >
+            flying squirrels will rule the world
+          </p>
+        </div>
+        <div class="flex-grow"></div>
+        <div class="squirrel-names">
+          <p>Head squirrel:</p>
+          <p>
+            <a href="https://github.com/Jagholin"
+              >Jagholin <i class="fa-brands fa-github"></i></a>
+          </p>
+        </div>
+      </div>
+    </header>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+  </body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  :root {
+    --accent: 124, 58, 237;
+    --accent-gradient: linear-gradient(
+      45deg,
+      white 20%,
+      #7c54a9 70%,
+      var(--secondary-background)
+    );
+    --background: rgb(241, 231, 249);
+    --secondary-background: #140e34;
+    --secondary-text: white;
+    --content-width: 100ch;
+    --link-color: rgb(var(--accent));
+    --link-hover-color: #da62c4;
+    --link-visited-color: #774285;
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background-color: var(--background);
+  }
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+  header {
+    background-color: var(--secondary-background);
+    color: var(--secondary-text);
+    box-shadow: 0 0 1.1rem 0.4rem rgba(0, 0, 0, 0.9);
+  }
+
+  .subheader {
+    margin-top: -0.5rem;
+    display: none;
+  }
+  .squirrel-names {
+    display: none;
+  }
+
+  @media (min-width: 600px) {
+    .subheader {
+      display: block;
+    }
+    .squirrel-names {
+      display: block;
+      align-self: flex-end;
+      text-align: right;
+    }
+  }
+
+  .header-content,
+  main {
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding: 1.4rem;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Archivo, sans-serif;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  @supports (font-variation-settings: normal) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: ArchivoVariable, sans-serif;
+    }
+
+    h1 {
+      font-variation-settings: "wght" 800;
+    }
+  }
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+  }
 </style>

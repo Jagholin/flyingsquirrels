@@ -1,0 +1,146 @@
+---
+title: "How to: Material UI"
+publishDate: 02.09.2023
+author: Jagholin
+
+---
+import Howto from '../../components/Howto.astro';
+import mui_app from '../../assets/pics/mui_app.png';
+
+# Material UI for React
+
+<Howto publishDate={frontmatter.publishDate} />
+
+Material UI is a popular user interface library for React. It provides a set of reusable components that follow the Material Design guidelines, which were created by Google to provide a consistent visual language across all platforms and devices.
+
+## Getting started
+
+To start using Material UI components in your React application, run the following command:
+
+`npm install @mui/material @emotion/react @emotion/styled`
+
+Or, if you are using yarn:
+
+`yarn add @mui/material @emotion/react @emotion/styled`
+
+It is also advised to install Roboto font. Material UI components were created to be used with it.
+
+`npm install @fontsource/roboto`
+
+For this to take effect, you will also need to add these import statements to the index.js file of your application:
+
+```javascript
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+```
+
+## Create a page with an AppBar and MUI Container
+
+The main page in the Material UI application typically has appbar/toolbar fixed on the top, main working area in the middle, and (optionally) sidebar or footer (status bar) on the bottom of the page. The simplest application then looks something like this:
+
+```javascript
+export default function App() {
+  return (
+    <>
+      <CssBaseline />
+      <AppBar>
+        <ToolBar>
+          <Typography variant="h5">Application name</Typography>
+        </ToolBar>
+      </AppBar>
+      <ToolBar></ToolBar>
+      <Container maxWidth="lg">
+        <Typography>
+          The main content goes here!
+        </Typography>
+      </Container>
+    </>
+  );
+}
+```
+
+There are several things that you can notice in this small snippet. First of all, `<Typography>` is used for all the text blocks. This component has a limited set of variants for the text styling, making sure that all text is styled consistently across the application. You can find all the different variants in the API documentation
+
+Another useful prop that the `<Typography>` element has is called gutterBottom. It adds a margin to the bottom of the element to separate different paragraphs visually from each other.
+
+`<CssBaseline>` is a CSS Reset that is developed with the Material UI in mind. Besides the usual stuff like removing all the margins and setting box-sizing to border-box, it also sets some default values like background color to the values that are suggested by Material guidelines.
+
+`<AppBar>`'s default display property is fixed, which means that it always stays on top of the page. Since this also removes it from the usual layout flow, we need to adjust other content so that it isnt hidden behind the toolbar. We do this by adding a second `<ToolBar>` element that has the same size(height) as the `<AppBar>` before it.
+
+Finally, `<Container>` component is used to wrap the main content of the application. Its property maxWidth   limits the width of the content to limit its spread on wider screens.
+
+## Component layout with Grid
+
+Material UI for React uses similar system to the Bootstrap UI, where it provides a layout container that splits the available width into 12 identical columns. In Material UI, `<Grid>` component is used for this purpose. A typical usage of `<Grid>`  looks something like this:
+
+```javascript
+<Grid container spacing={1}>
+  <Grid item xs={12} md={6}>
+    item one
+  </Grid>
+  <Grid item xs={12} md={6}>
+    item two
+  </Grid>
+</Grid>
+```
+
+There are 2 things you can notice here:
+
+- `<Grid>` takes the roles of both container and contained item. Which one it is, is determined by the props container and item
+- Material UI supports responsive design by introducing breakpoints into its different components. In this example, breakpoints _xs_(for extra small) and _md_(for medium) are used. Usually the value of the breakpoints changes the dimensions of the component, in this case, it corresponds to #of columns that each of the items spans.
+
+## MUI Customization
+
+There are multiple ways to customize the look and feel of Material UI components. First of all, you can customize the theme using `createTheme()` function, that will create a theme object for you that you can apply to the application with the `<ThemeProvider>` component. This will allow you to set your own color pallete, text styles, layout breakpoints and other such variables. You can also use the theme variables in your own components with the `useTheme()` hook.
+
+Another option is to use sx prop that exists on every Material UI component. It is like the style prop and allows you to specify inline styling, with the advantage of extended CSS syntax. For example, this SASS-like styling is possible:
+
+```javascript
+<Slider
+  defaultValue={30}
+  sx={{
+    width: 300,
+    color: 'success.main',
+    '& .MuiSlider-thumb': {
+      borderRadius: '1px',
+    },
+  }}
+/>
+```
+
+If you find yourself using the same styles for your components again and again, you can take advantage of the `styled()` function to create a new component that encapsulates your preferred style:
+
+```javascript
+const SuccessSlider = styled(Slider)<SliderProps>(({ theme }) => ({
+  width: 300,
+  color: theme.palette.success.main,
+  '& .MuiSlider-thumb': {
+    '&:hover, &.Mui-focusVisible': {
+      boxShadow: `0px 0px 0px 8px ${alpha(theme.palette.success.main, 0.16)}`,
+    },
+    '&.Mui-active': {
+      boxShadow: `0px 0px 0px 14px ${alpha(theme.palette.success.main, 0.16)}`,
+    },
+  },
+}));
+
+export default function StyledCustomization() {
+  return <SuccessSlider defaultValue={30} />;
+}
+```
+
+As you can see, Material UI for React provides a lot of options for customization for every use case.
+
+## Conclusion
+<figure>
+    <img src={mui_app} alt="App created with Material UI" />
+    <figcaption>
+        Meme generator app created with Material UI.
+    </figcaption>
+</figure>
+
+Material UI provides a wide range of components that can be used to build a complete user interface. This includes form elements, navigation components, and even more complex components such as data tables and modals. This makes it a great choice for building both simple and complex applications.
+
+Overall, Material UI offers a comprehensive set of components that follow Material Design guidelines, it is highly customizable and easy to integrate with other React libraries, and has a active community. All of these factors make it a great choice for building user interfaces with React.

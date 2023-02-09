@@ -1,0 +1,55 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import { getCollection, getEntryBySlug } from "astro:content";
+
+const posts = await getCollection("posts");
+
+---
+
+<Layout title="Webdev Blog">
+  <ul>
+    {
+      posts.map(post => (
+        <li>
+          <a href={`/posts/${post.slug}`} class="blog-wrapper">
+            <div class="blog-title">{post.data.title}</div>
+            <div class="blog-data">{post.data.publishDate.toLocaleDateString()} by {post.data.author}</div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
+
+<style>
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border: 1px solid #ccc;
+    padding: 1rem 2rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.4);
+    transition: 200ms;
+  }
+
+  .blog-wrapper:hover {
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+    background: var(--accent-gradient);
+  }
+
+  .blog-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .blog-data {
+    font-size: 1rem;
+    color: #666;
+  }
+</style>

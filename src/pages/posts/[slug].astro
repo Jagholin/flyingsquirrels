@@ -1,0 +1,56 @@
+---
+import { getEntryBySlug } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+const { slug } = Astro.params as {slug: string};
+const entry = await getEntryBySlug('posts', slug);
+if (!entry) {
+  throw new Error(`No post found with slug "${slug}"`);    
+}
+const { Content, headings } = await entry.render();
+---
+<Layout title={entry.data.title}>
+  <Content />
+  <div class="submatter">
+    <p class="text-right text-gray-600">
+      By {entry.data.author}. Published on {entry.data.publishDate.toLocaleDateString()}
+    </p>
+  </div>
+  <div class="rightuparrow" id="scrolltop">
+    <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
+  </div>
+</Layout>
+
+<style>
+  .submatter {
+    border-top: 1px solid black;
+    margin-block: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .rightuparrow {
+    position: fixed;
+    bottom: 2rem;
+    right: 3rem;
+    width: 50px;
+    height: 50px;
+    border: 3px solid black;
+    opacity: 0.5;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 30px;
+    display: none;
+    place-items: center;
+  }
+</style>
+
+<script>
+  const scrolltop = document.getElementById("scrolltop") as HTMLDivElement;
+
+  window.addEventListener("scroll", (e) => {
+    if (window.scrollY > 400) {
+      scrolltop.style.display = "grid";
+    } else {
+      scrolltop.style.display = "none";
+    }
+  })
+</script>
