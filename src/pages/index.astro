@@ -3,13 +3,46 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Flying squirrels.">
-  <h2>Home page</h2>
-  <p>Hello! This is my home page. From here, you can access:</p>
+  <h2>Introduction</h2>
+  <p>I'm a professional web developer. </p>
+  <p>From here, you can access some of my previous works:</p>
   <ul>
     <li><a href="/blog">My blog</a></li>
     <li>
-      <a href="https://pb.flyingsquirrels.de/">Pokefight</a> - a WBS group project.
-      <a href="https://github.com/stanvlv/pokefight">Github repo.</a>
+      <h3>Frontendmentor projects</h3>
+      <p>These are my solutions to some of the <a href="https://www.frontendmentor.io/" target="_blank">frontendmentor.io</a> challenges. </p>
+      <ul class="frontend-solutions">
+        <li>
+          <div class="title"><a href="https://www.frontendmentor.io/solutions/rest-countries-redux-emotion-reactrouter-accessibility-PQhaxbEc3V" target="_blank">Countries API with color theme switcher</a></div>
+          <div class="link"><a href="https://thunderous-dango-0227f1.netlify.app/" target="_blank"><i class="fa-solid fa-arrow-right"></i> Live solution</a></div>
+          <div class="github"><a href="https://github.com/Jagholin/countries-rest" target="_blank"><i class="fa-brands fa-github"></i> github repo</a></div>
+          <div class="comment">Libraries/frameworks used: <strong class="font-bold">React, React Router, Redux toolkit, Axios, Emotion, Playwright</strong></div>
+        </li>
+        <li>
+          <div class="title"><a href="https://www.frontendmentor.io/solutions/multi-step-form-with-vite-react-and-reacthookform-8w5pXqp1Zt" target="_blank">Multi-step form</a></div>
+          <div class="link"><a href="https://dynamic-tarsier-ee273d.netlify.app/" target="_blank"><i class="fa-solid fa-arrow-right"></i> Live solution</a></div>
+          <div class="github"><a href="https://github.com/Jagholin/multi-step" target="_blank"><i class="fa-brands fa-github"></i> github repo</a></div>
+          <div class="comment">Libraries/frameworks used: <strong class="font-bold">React, Sass, react-hook-form</strong></div>
+        </li>
+        <li>
+          <div class="title"><a href="https://www.frontendmentor.io/solutions/practicing-styling-inspired-by-cube-css-GmfrdFcbMf" target="_blank">Results summary component</a></div>
+          <div class="link"><a href="https://ornate-halva-a2f14a.netlify.app/" target="_blank"><i class="fa-solid fa-arrow-right"></i> Live solution</a></div>
+          <div class="github"><a href="https://github.com/Jagholin/results-summary-component" target="_blank"><i class="fa-brands fa-github"></i> github repo</a></div>
+          <div class="comment">This is just a little exercise to practice styling with <strong class="font-bold">Cube CSS</strong>. Pure <strong class="font-bold">HTML5/CSS</strong></div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h3>Other projects</h3>
+      <ul class="frontend-solutions">
+        <li>
+          <div class="title">Meme generator app</div>
+          <div class="link"><a href="https://dancing-sable-8f2c02.netlify.app/" target="_blank"><i class="fa-solid fa-arrow-right"></i> Live site</a></div>
+          <div class="github"><a href="https://github.com/Jagholin/meme-generator" target="_blank"><i class="fa-brands fa-github"></i> github repo</a></div>
+          <div class="comment">Meme generator app written using <strong class="font-bold">Material UI and React</strong></div>
+        </li>
+      </ul>
+      <p>You can find my other projects on my <a href="https://github.com/Jagholin"><i class="fa-brands fa-github"></i> profile.</a></p>
     </li>
   </ul>
 </Layout>
@@ -32,7 +65,15 @@ import Layout from "../layouts/Layout.astro";
     color: var(--link-visited-color)
   }
   ul {
-    list-style-type: disc;
-    margin-left: 1.5rem;
+    list-style-type: none;
+  }
+
+  .frontend-solutions li {
+    margin-bottom: 1.4rem;
+  }
+
+  .frontend-solutions .title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
   }
 </style>
